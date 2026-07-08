@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: head(#{nav.commandes})}"></head>
+<body>
+<div th:replace="~{fragments/nav :: nav}"></div>
+<main class="container pb-5">
+    <div th:replace="~{fragments/alerts :: alerts}"></div>
+    <h1 class="page-header" th:text="#{nav.commandes}">Commande</h1>
+    <form th:action="@{/commandes/save}" th:object="${form}" method="post" class="card card-body">
+        <div class="mb-3">
+            <label class="form-label" th:text="#{label.client}">Client</label>
+            <select class="form-select" th:field="*{clientPk}">
+                <option th:each="c : ${clients}" th:value="${c.id}" th:text="${c.nomComplet}"></option>
+            </select>
+            <div class="form-error" th:if="${#fields.hasErrors('clientPk')}" th:errors="*{clientPk}"></div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" th:text="#{label.plat}">Plat</label>
+            <select class="form-select" th:field="*{platPk}">
+                <option th:each="p : ${plats}" th:value="${p.id}"
+                        th:text="${p.nom + ' (' + p.prixFc + ' FC)'}"></option>
+            </select>
+            <div class="form-error" th:if="${#fields.hasErrors('platPk')}" th:errors="*{platPk}"></div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" th:text="#{label.note}">Note</label>
+            <textarea class="form-control" th:field="*{note}" maxlength="255" rows="3"></textarea>
+            <div class="form-error" th:if="${#fields.hasErrors('note')}" th:errors="*{note}"></div>
+        </div>
+        <div class="d-flex gap-2">
+            <button class="btn btn-primary" type="submit" th:text="#{action.save}">Enregistrer</button>
+            <a class="btn btn-secondary" th:href="@{/commandes}" th:text="#{action.cancel}">Annuler</a>
+        </div>
+    </form>
+</main>
+<div th:replace="~{fragments/scripts :: scripts}"></div>
+</body>
+</html>

@@ -1,0 +1,1 @@
+SOURCE reset-data.sql;
