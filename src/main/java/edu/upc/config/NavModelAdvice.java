@@ -13,25 +13,25 @@ public class NavModelAdvice {
 		return "/".equals(request.getRequestURI());
 	}
 
-	@ModelAttribute("navCategories")
-	public boolean navCategories(HttpServletRequest request) {
-		return request.getRequestURI().startsWith("/categories");
+	@ModelAttribute("navSpecialites")
+	public boolean navSpecialites(HttpServletRequest request) {
+		return request.getRequestURI().startsWith("/specialites");
 	}
 
-	@ModelAttribute("navClients")
-	public boolean navClients(HttpServletRequest request) {
+	@ModelAttribute("navMedecins")
+	public boolean navMedecins(HttpServletRequest request) {
 		String path = request.getRequestURI();
-		return path.startsWith("/clients") && !path.startsWith("/clients-");
+		return path.startsWith("/medecins") && !path.startsWith("/medecins-");
 	}
 
-	@ModelAttribute("navPlats")
-	public boolean navPlats(HttpServletRequest request) {
-		return request.getRequestURI().startsWith("/plats");
+	@ModelAttribute("navPatients")
+	public boolean navPatients(HttpServletRequest request) {
+		return request.getRequestURI().startsWith("/patients");
 	}
 
-	@ModelAttribute("navCommandes")
-	public boolean navCommandes(HttpServletRequest request) {
-		return request.getRequestURI().startsWith("/commandes");
+	@ModelAttribute("navRendezVous")
+	public boolean navRendezVous(HttpServletRequest request) {
+		return request.getRequestURI().startsWith("/rendezvous");
 	}
 
 }

@@ -33,10 +33,10 @@ class ApplicationIntegrationTest {
 	@Autowired
 	private MockMvc mockMvc;
 
-	private static Long categorieId;
-	private static Long platId;
-	private static Long clientId;
-	private static Long commandeId;
+	private static Long specialiteId;
+	private static Long patientId;
+	private static Long medecinId;
+	private static Long rendezVousId;
 
 	private static String suffix;
 
@@ -53,103 +53,103 @@ class ApplicationIntegrationTest {
 
 	@Test
 	@Order(1)
-	void categoriesCrud() throws Exception {
-		mockMvc.perform(get("/api/categories"))
+	void specialitesCrud() throws Exception {
+		mockMvc.perform(get("/api/specialites"))
 				.andExpect(status().isOk())
 				.andExpect(jsonPath("$", hasSize(greaterThanOrEqualTo(3))));
 
-		MvcResult created = mockMvc.perform(post("/api/categories")
+		MvcResult created = mockMvc.perform(post("/api/specialites")
 						.contentType(MediaType.APPLICATION_JSON)
-						.content("{\"libelle\":\"Test Categorie API " + suffix + "\"}"))
+						.content("{\"libelle\":\"Test Specialite API " + suffix + "\"}"))
 				.andExpect(status().isCreated())
 				.andExpect(jsonPath("$.id").exists())
 				.andReturn();
 
-		categorieId = readId(created);
+		specialiteId = readId(created);
 
-		mockMvc.perform(get("/api/categories/" + categorieId))
+		mockMvc.perform(get("/api/specialites/" + specialiteId))
 				.andExpect(status().isOk())
-				.andExpect(jsonPath("$.libelle").value("Test Categorie API " + suffix));
+				.andExpect(jsonPath("$.libelle").value("Test Specialite API " + suffix));
 
-		mockMvc.perform(put("/api/categories/" + categorieId)
+		mockMvc.perform(put("/api/specialites/" + specialiteId)
 						.contentType(MediaType.APPLICATION_JSON)
-						.content("{\"libelle\":\"Test Categorie MAJ " + suffix + "\"}"))
+						.content("{\"libelle\":\"Test Specialite MAJ " + suffix + "\"}"))
 				.andExpect(status().isOk())
-				.andExpect(jsonPath("$.libelle").value("Test Categorie MAJ " + suffix));
+				.andExpect(jsonPath("$.libelle").value("Test Specialite MAJ " + suffix));
 	}
 
 	@Test
 	@Order(2)
-	void platsApiStillWorks() throws Exception {
-		mockMvc.perform(get("/api/plats"))
+	void patientsApiStillWorks() throws Exception {
+		mockMvc.perform(get("/api/patients"))
 				.andExpect(status().isOk())
 				.andExpect(jsonPath("$", hasSize(greaterThanOrEqualTo(3))));
 
-		MvcResult created = mockMvc.perform(post("/api/plats")
+		MvcResult created = mockMvc.perform(post("/api/patients")
 						.contentType(MediaType.APPLICATION_JSON)
-						.content("{\"nom\":\"Test Plat API " + suffix + "\",\"prixFc\":15000}"))
+						.content("{\"nom\":\"Test Patient API " + suffix + "\",\"age\":32}"))
 				.andExpect(status().isCreated())
 				.andReturn();
 
-		platId = readId(created);
+		patientId = readId(created);
 
-		mockMvc.perform(get("/api/plats/" + platId))
+		mockMvc.perform(get("/api/patients/" + patientId))
 				.andExpect(status().isOk())
-				.andExpect(jsonPath("$.prixFc").value(15000));
+				.andExpect(jsonPath("$.age").value(32));
 	}
 
 	@Test
 	@Order(3)
-	void clientsWithCategorieJoin() throws Exception {
-		mockMvc.perform(get("/api/clients"))
+	void medecinsWithSpecialiteJoin() throws Exception {
+		mockMvc.perform(get("/api/medecins"))
 				.andExpect(status().isOk())
-				.andExpect(jsonPath("$[0].categorie.libelle").exists());
+				.andExpect(jsonPath("$[0].specialite.libelle").exists());
 
-		mockMvc.perform(get("/api/clients?keyword=Mbiya"))
+		mockMvc.perform(get("/api/medecins?keyword=Lumumba"))
 				.andExpect(status().isOk())
-				.andExpect(jsonPath("$[0].nomComplet").value("Mbiya Nkuadi Betsaleel"))
-				.andExpect(jsonPath("$[0].categorie.libelle").value("VIP"));
+				.andExpect(jsonPath("$[0].nomComplet").value("Dr. Lumumba Patrick"))
+				.andExpect(jsonPath("$[0].specialite.libelle").value("Medecine generale"));
 
-		MvcResult created = mockMvc.perform(post("/api/clients")
+		MvcResult created = mockMvc.perform(post("/api/medecins")
 						.contentType(MediaType.APPLICATION_JSON)
 						.content("""
 								{
-								  "categoriePk": 1,
-								  "nomComplet": "Test Client API",
-								  "quartier": "Gombe",
-								  "email": "test.client@restaurant.rdc",
-								  "pointsFidelite": 40
+								  "specialitePk": 1,
+								  "nomComplet": "Dr. Test API",
+								  "etablissement": "Clinique Test",
+								  "email": "test.medecin@clinique.rdc",
+								  "anneesExperience": 5
 								}
 								"""))
 				.andExpect(status().isCreated())
-				.andExpect(jsonPath("$.categorie.libelle").value("Bronze"))
+				.andExpect(jsonPath("$.specialite.libelle").value("Cardiologie"))
 				.andReturn();
 
-		clientId = readId(created);
+		medecinId = readId(created);
 
-		mockMvc.perform(get("/api/clients/" + clientId))
+		mockMvc.perform(get("/api/medecins/" + medecinId))
 				.andExpect(status().isOk())
-				.andExpect(jsonPath("$.plats").isArray());
+				.andExpect(jsonPath("$.patients").isArray());
 	}
 
 	@Test
 	@Order(4)
-	void commandeEnrollment() throws Exception {
-		mockMvc.perform(get("/api/commandes"))
+	void rendezVousEnrollment() throws Exception {
+		mockMvc.perform(get("/api/rendezvous"))
 				.andExpect(status().isOk())
 				.andExpect(jsonPath("$", hasSize(greaterThanOrEqualTo(3))));
 
-		MvcResult created = mockMvc.perform(post("/api/commandes")
+		MvcResult created = mockMvc.perform(post("/api/rendezvous")
 						.contentType(MediaType.APPLICATION_JSON)
-						.content("{\"clientPk\":" + clientId + ",\"platPk\":" + platId + ",\"note\":\"Excellent plat de test !\"}"))
+						.content("{\"medecinPk\":" + medecinId + ",\"patientPk\":" + patientId + ",\"motif\":\"Consultation de test API\"}"))
 				.andExpect(status().isCreated())
-				.andExpect(jsonPath("$.client.nomComplet").value("Test Client API"))
-				.andExpect(jsonPath("$.plat.nom").value("Test Plat API " + suffix))
+				.andExpect(jsonPath("$.medecin.nomComplet").value("Dr. Test API"))
+				.andExpect(jsonPath("$.patient.nom").value("Test Patient API " + suffix))
 				.andReturn();
 
-		commandeId = readId(created);
+		rendezVousId = readId(created);
 
-		mockMvc.perform(delete("/api/commandes/" + commandeId))
+		mockMvc.perform(delete("/api/rendezvous/" + rendezVousId))
 				.andExpect(status().isOk());
 	}
 
@@ -159,19 +159,19 @@ class ApplicationIntegrationTest {
 		mockMvc.perform(get("/"))
 				.andExpect(status().isOk());
 
-		mockMvc.perform(get("/categories"))
+		mockMvc.perform(get("/specialites"))
 				.andExpect(status().isOk());
 
-		mockMvc.perform(get("/plats"))
+		mockMvc.perform(get("/patients"))
 				.andExpect(status().isOk());
 
-		mockMvc.perform(get("/clients"))
+		mockMvc.perform(get("/medecins"))
 				.andExpect(status().isOk());
 
-		mockMvc.perform(get("/clients?keyword=Mbiya"))
+		mockMvc.perform(get("/medecins?keyword=Lumumba"))
 				.andExpect(status().isOk());
 
-		mockMvc.perform(get("/commandes"))
+		mockMvc.perform(get("/rendezvous"))
 				.andExpect(status().isOk());
 	}
 
@@ -181,21 +181,21 @@ class ApplicationIntegrationTest {
 	}
 
 	private void cleanupCreatedEntities() throws Exception {
-		if (commandeId != null) {
-			mockMvc.perform(delete("/api/commandes/" + commandeId));
-			commandeId = null;
+		if (rendezVousId != null) {
+			mockMvc.perform(delete("/api/rendezvous/" + rendezVousId));
+			rendezVousId = null;
 		}
-		if (clientId != null) {
-			mockMvc.perform(delete("/api/clients/" + clientId));
-			clientId = null;
+		if (medecinId != null) {
+			mockMvc.perform(delete("/api/medecins/" + medecinId));
+			medecinId = null;
 		}
-		if (platId != null) {
-			mockMvc.perform(delete("/api/plats/" + platId));
-			platId = null;
+		if (patientId != null) {
+			mockMvc.perform(delete("/api/patients/" + patientId));
+			patientId = null;
 		}
-		if (categorieId != null) {
-			mockMvc.perform(delete("/api/categories/" + categorieId));
-			categorieId = null;
+		if (specialiteId != null) {
+			mockMvc.perform(delete("/api/specialites/" + specialiteId));
+			specialiteId = null;
 		}
 	}
 

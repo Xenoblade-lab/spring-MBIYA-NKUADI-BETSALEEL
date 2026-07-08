@@ -1,32 +1,32 @@
 # spring-MBIYA-NKUADI-BETSALEEL
 
-Application Spring Boot — **Restaurant Mbiya** (gestion de restaurant, Kinshasa).
+Application Spring Boot — **Gestion de rendez-vous medicaux** (Clinique Mbiya, Kinshasa).
 
 **Auteur :** Mbiya Nkuadi Betsaleel
 
-## Domaine métier
+## Domaine metier
 
-| Entité | Description |
+| Entite | Description |
 |--------|-------------|
-| **Catégorie** | Niveaux de fidélité (Bronze, Argent, Or, VIP, Nouveau) |
-| **Plat** | Plats du menu avec prix en francs congolais |
-| **Client** | Clients du restaurant avec quartier et points fidélité |
-| **Commande** | Lien client ↔ plat avec note / avis |
+| **Specialite** | Cardiologie, pediatrie, dermatologie, medecine generale, gynecologie |
+| **Patient** | Patients avec nom et age |
+| **Medecin** | Praticiens lies a une specialite et un etablissement |
+| **RendezVous** | Consultation planifiee entre un medecin et un patient |
 
-## Prérequis
+## Prerequis
 
 - Java 21
 - MySQL 8 (Laragon)
 - Maven (wrapper inclus)
 
-## Base de données
+## Base de donnees
 
 ```bash
 mysql -u root --default-character-set=utf8mb4 < sql/schema.sql
 mysql -u root --default-character-set=utf8mb4 < sql/reset-data.sql
 ```
 
-Base : `restaurant_mbiya_db` — utilisateur `root` sans mot de passe (profil `dev`).
+Base : `rdv_medical_mbiya_db` — utilisateur `root` sans mot de passe (profil `dev`).
 
 ## Lancement
 
@@ -40,10 +40,10 @@ Application : [http://localhost:8082](http://localhost:8082)
 
 | Module | Web | API REST |
 |--------|-----|----------|
-| Catégories | `/categories` | `/api/categories` |
-| Clients | `/clients` | `/api/clients` |
-| Plats | `/plats` | `/api/plats` |
-| Commandes | `/commandes` | `/api/commandes` |
+| Specialites | `/specialites` | `/api/specialites` |
+| Medecins | `/medecins` | `/api/medecins` |
+| Patients | `/patients` | `/api/patients` |
+| Rendez-vous | `/rendezvous` | `/api/rendezvous` |
 
 ## Tests
 
@@ -51,6 +51,6 @@ Application : [http://localhost:8082](http://localhost:8082)
 ./mvnw test -DforkCount=0
 ```
 
-## Données démo
+## Donnees demo
 
-Client principal (ID 1) : **Mbiya Nkuadi Betsaleel** — Gombe, Kinshasa — catégorie VIP.
+Patient principal (ID 1) : **Mbiya Nkuadi Betsaleel** — 28 ans — consultations avec Dr. Lumumba Patrick.

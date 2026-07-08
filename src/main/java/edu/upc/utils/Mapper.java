@@ -2,67 +2,67 @@ package edu.upc.utils;
 
 import org.springframework.stereotype.Component;
 
-import edu.upc.models.Plat;
-import edu.upc.models.Categorie;
-import edu.upc.models.Client;
-import edu.upc.models.Commande;
-import edu.upc.models.dtos.PlatDto;
-import edu.upc.models.dtos.CategorieDto;
-import edu.upc.models.dtos.ClientDto;
-import edu.upc.models.dtos.CommandeDto;
+import edu.upc.models.Patient;
+import edu.upc.models.Specialite;
+import edu.upc.models.Medecin;
+import edu.upc.models.RendezVous;
+import edu.upc.models.dtos.PatientDto;
+import edu.upc.models.dtos.SpecialiteDto;
+import edu.upc.models.dtos.MedecinDto;
+import edu.upc.models.dtos.RendezVousDto;
 
 @Component
 public class Mapper {
 
-	public Plat mapToPlat(PlatDto dto) {
-		return Plat.builder().nom(dto.getNom()).prixFc(dto.getPrixFc()).build();
+	public Patient mapToPatient(PatientDto dto) {
+		return Patient.builder().nom(dto.getNom()).age(dto.getAge()).build();
 	}
 
-	public Categorie mapToCategorie(CategorieDto dto) {
-		return Categorie.builder().libelle(dto.getLibelle()).build();
+	public Specialite mapToSpecialite(SpecialiteDto dto) {
+		return Specialite.builder().libelle(dto.getLibelle()).build();
 	}
 
-	public Client mapToClient(ClientDto dto) {
-		return Client.builder()
-				.categoriePk(dto.getCategoriePk())
+	public Medecin mapToMedecin(MedecinDto dto) {
+		return Medecin.builder()
+				.specialitePk(dto.getSpecialitePk())
 				.nomComplet(dto.getNomComplet())
-				.quartier(dto.getQuartier())
+				.etablissement(dto.getEtablissement())
 				.email(dto.getEmail())
-				.pointsFidelite(dto.getPointsFidelite())
+				.anneesExperience(dto.getAnneesExperience())
 				.build();
 	}
 
-	public Commande mapToCommande(CommandeDto dto) {
-		return Commande.builder()
-				.clientPk(dto.getClientPk())
-				.platPk(dto.getPlatPk())
-				.note(dto.getNote())
+	public RendezVous mapToRendezVous(RendezVousDto dto) {
+		return RendezVous.builder()
+				.medecinPk(dto.getMedecinPk())
+				.patientPk(dto.getPatientPk())
+				.motif(dto.getMotif())
 				.build();
 	}
 
-	public CategorieDto toCategorieDto(Categorie entity) {
-		return CategorieDto.builder().libelle(entity.getLibelle()).build();
+	public SpecialiteDto toSpecialiteDto(Specialite entity) {
+		return SpecialiteDto.builder().libelle(entity.getLibelle()).build();
 	}
 
-	public PlatDto toPlatDto(Plat entity) {
-		return PlatDto.builder().nom(entity.getNom()).prixFc(entity.getPrixFc()).build();
+	public PatientDto toPatientDto(Patient entity) {
+		return PatientDto.builder().nom(entity.getNom()).age(entity.getAge()).build();
 	}
 
-	public ClientDto toClientDto(Client entity) {
-		return ClientDto.builder()
-				.categoriePk(entity.getCategoriePk())
+	public MedecinDto toMedecinDto(Medecin entity) {
+		return MedecinDto.builder()
+				.specialitePk(entity.getSpecialitePk())
 				.nomComplet(entity.getNomComplet())
-				.quartier(entity.getQuartier())
+				.etablissement(entity.getEtablissement())
 				.email(entity.getEmail())
-				.pointsFidelite(entity.getPointsFidelite())
+				.anneesExperience(entity.getAnneesExperience())
 				.build();
 	}
 
-	public CommandeDto toCommandeDto(Commande entity) {
-		return CommandeDto.builder()
-				.clientPk(entity.getClientPk())
-				.platPk(entity.getPlatPk())
-				.note(entity.getNote())
+	public RendezVousDto toRendezVousDto(RendezVous entity) {
+		return RendezVousDto.builder()
+				.medecinPk(entity.getMedecinPk())
+				.patientPk(entity.getPatientPk())
+				.motif(entity.getMotif())
 				.build();
 	}
 

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: head(#{nav.rendezvous})}"></head>
+<body>
+<div th:replace="~{fragments/nav :: nav}"></div>
+<main class="container pb-5">
+    <div th:replace="~{fragments/alerts :: alerts}"></div>
+    <h1 class="page-header" th:text="#{nav.rendezvous}">Rendez-vous</h1>
+    <form th:action="@{/rendezvous/save}" th:object="${form}" method="post" class="card card-body">
+        <div class="mb-3">
+            <label class="form-label" th:text="#{label.medecin}">Medecin</label>
+            <select class="form-select" th:field="*{medecinPk}">
+                <option th:each="m : ${medecins}" th:value="${m.id}" th:text="${m.nomComplet}"></option>
+            </select>
+            <div class="form-error" th:if="${#fields.hasErrors('medecinPk')}" th:errors="*{medecinPk}"></div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" th:text="#{label.patient}">Patient</label>
+            <select class="form-select" th:field="*{patientPk}">
+                <option th:each="p : ${patients}" th:value="${p.id}"
+                        th:text="${p.nom + ' (' + p.age + ' ans)'}"></option>
+            </select>
+            <div class="form-error" th:if="${#fields.hasErrors('patientPk')}" th:errors="*{patientPk}"></div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" th:text="#{label.motif}">Motif</label>
+            <textarea class="form-control" th:field="*{motif}" maxlength="255" rows="3"></textarea>
+            <div class="form-error" th:if="${#fields.hasErrors('motif')}" th:errors="*{motif}"></div>
+        </div>
+        <div class="d-flex gap-2">
+            <button class="btn btn-primary" type="submit" th:text="#{action.save}">Enregistrer</button>
+            <a class="btn btn-secondary" th:href="@{/rendezvous}" th:text="#{action.cancel}">Annuler</a>
+        </div>
+    </form>
+</main>
+<div th:replace="~{fragments/scripts :: scripts}"></div>
+</body>
+</html>

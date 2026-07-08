@@ -8,57 +8,57 @@
 
     <section class="hero-section text-center mb-5">
         <div class="hero-badge mb-3">
-            <i class="bi bi-cup-hot me-1"></i> Cuisine congolaise
+            <i class="bi bi-hospital me-1"></i> Sante &amp; consultations
         </div>
-        <h1 class="hero-title" th:text="#{home.welcome}">Restaurant Mbiya</h1>
+        <h1 class="hero-title" th:text="#{home.welcome}">Clinique Mbiya</h1>
         <p class="hero-subtitle" th:text="#{home.subtitle}">Sous-titre</p>
-        <a class="btn btn-primary btn-lg hero-cta mt-2" th:href="@{/plats}">
-            <i class="bi bi-menu-button-wide me-2"></i><span th:text="#{home.hero.cta}">Voir la carte</span>
+        <a class="btn btn-primary btn-lg hero-cta mt-2" th:href="@{/rendezvous}">
+            <i class="bi bi-calendar-check me-2"></i><span th:text="#{home.hero.cta}">Rendez-vous</span>
         </a>
     </section>
 
     <div class="row g-4">
         <div class="col-12 col-sm-6 col-lg-3">
-            <a class="dashboard-card card h-100 text-decoration-none" th:href="@{/categories}">
+            <a class="dashboard-card card h-100 text-decoration-none" th:href="@{/specialites}">
                 <div class="card-body">
-                    <div class="dashboard-icon categories-icon">
-                        <i class="bi bi-award"></i>
+                    <div class="dashboard-icon specialites-icon">
+                        <i class="bi bi-heart-pulse"></i>
                     </div>
-                    <h2 class="dashboard-title" th:text="#{nav.categories}">Catégories</h2>
-                    <p class="dashboard-desc" th:text="#{card.categories.desc}">Fidélité</p>
+                    <h2 class="dashboard-title" th:text="#{nav.specialites}">Specialites</h2>
+                    <p class="dashboard-desc" th:text="#{card.specialites.desc}">Specialites</p>
                 </div>
             </a>
         </div>
         <div class="col-12 col-sm-6 col-lg-3">
-            <a class="dashboard-card card h-100 text-decoration-none" th:href="@{/clients}">
+            <a class="dashboard-card card h-100 text-decoration-none" th:href="@{/medecins}">
                 <div class="card-body">
-                    <div class="dashboard-icon clients-icon">
-                        <i class="bi bi-people"></i>
+                    <div class="dashboard-icon medecins-icon">
+                        <i class="bi bi-person-badge"></i>
                     </div>
-                    <h2 class="dashboard-title" th:text="#{nav.clients}">Clients</h2>
-                    <p class="dashboard-desc" th:text="#{card.clients.desc}">Fidèles</p>
+                    <h2 class="dashboard-title" th:text="#{nav.medecins}">Medecins</h2>
+                    <p class="dashboard-desc" th:text="#{card.medecins.desc}">Medecins</p>
                 </div>
             </a>
         </div>
         <div class="col-12 col-sm-6 col-lg-3">
-            <a class="dashboard-card card h-100 text-decoration-none" th:href="@{/plats}">
+            <a class="dashboard-card card h-100 text-decoration-none" th:href="@{/patients}">
                 <div class="card-body">
-                    <div class="dashboard-icon plats-icon">
-                        <i class="bi bi-egg-fried"></i>
+                    <div class="dashboard-icon patients-icon">
+                        <i class="bi bi-person-heart"></i>
                     </div>
-                    <h2 class="dashboard-title" th:text="#{nav.plats}">Plats</h2>
-                    <p class="dashboard-desc" th:text="#{card.plats.desc}">Menu</p>
+                    <h2 class="dashboard-title" th:text="#{nav.patients}">Patients</h2>
+                    <p class="dashboard-desc" th:text="#{card.patients.desc}">Patients</p>
                 </div>
             </a>
         </div>
         <div class="col-12 col-sm-6 col-lg-3">
-            <a class="dashboard-card card h-100 text-decoration-none" th:href="@{/commandes}">
+            <a class="dashboard-card card h-100 text-decoration-none" th:href="@{/rendezvous}">
                 <div class="card-body">
-                    <div class="dashboard-icon commandes-icon">
-                        <i class="bi bi-receipt"></i>
+                    <div class="dashboard-icon rendezvous-icon">
+                        <i class="bi bi-calendar-check"></i>
                     </div>
-                    <h2 class="dashboard-title" th:text="#{nav.commandes}">Commandes</h2>
-                    <p class="dashboard-desc" th:text="#{card.commandes.desc}">Avis clients</p>
+                    <h2 class="dashboard-title" th:text="#{nav.rendezvous}">Rendez-vous</h2>
+                    <p class="dashboard-desc" th:text="#{card.rendezvous.desc}">Consultations</p>
                 </div>
             </a>
         </div>

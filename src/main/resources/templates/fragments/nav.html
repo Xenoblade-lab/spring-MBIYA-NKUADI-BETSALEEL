@@ -1,7 +1,7 @@
 <nav th:fragment="nav" class="navbar navbar-expand-lg navbar-dark mb-3 mb-md-4">
     <div class="container">
         <a class="navbar-brand" th:href="@{/}">
-            <i class="bi bi-cup-hot me-2"></i><span th:text="#{app.title}">App</span>
+            <i class="bi bi-hospital me-2"></i><span th:text="#{app.title}">App</span>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
                 aria-controls="mainNavbar" aria-expanded="false" th:attr="aria-label=#{nav.menu}">
@@ -15,24 +15,24 @@
                        th:attr="aria-current=${navHome} ? 'page' : null">Accueil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/categories}" th:text="#{nav.categories}"
-                       th:classappend="${navCategories} ? ' active' : ''"
-                       th:attr="aria-current=${navCategories} ? 'page' : null">Catégories</a>
+                    <a class="nav-link" th:href="@{/specialites}" th:text="#{nav.specialites}"
+                       th:classappend="${navSpecialites} ? ' active' : ''"
+                       th:attr="aria-current=${navSpecialites} ? 'page' : null">Specialites</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/clients}" th:text="#{nav.clients}"
-                       th:classappend="${navClients} ? ' active' : ''"
-                       th:attr="aria-current=${navClients} ? 'page' : null">Clients</a>
+                    <a class="nav-link" th:href="@{/medecins}" th:text="#{nav.medecins}"
+                       th:classappend="${navMedecins} ? ' active' : ''"
+                       th:attr="aria-current=${navMedecins} ? 'page' : null">Medecins</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/plats}" th:text="#{nav.plats}"
-                       th:classappend="${navPlats} ? ' active' : ''"
-                       th:attr="aria-current=${navPlats} ? 'page' : null">Plats</a>
+                    <a class="nav-link" th:href="@{/patients}" th:text="#{nav.patients}"
+                       th:classappend="${navPatients} ? ' active' : ''"
+                       th:attr="aria-current=${navPatients} ? 'page' : null">Patients</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/commandes}" th:text="#{nav.commandes}"
-                       th:classappend="${navCommandes} ? ' active' : ''"
-                       th:attr="aria-current=${navCommandes} ? 'page' : null">Commandes</a>
+                    <a class="nav-link" th:href="@{/rendezvous}" th:text="#{nav.rendezvous}"
+                       th:classappend="${navRendezVous} ? ' active' : ''"
+                       th:attr="aria-current=${navRendezVous} ? 'page' : null">Rendez-vous</a>
                 </li>
             </ul>
         </div>
